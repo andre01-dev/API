@@ -1,4 +1,4 @@
-import { conectionTenis } from "./conection.js";
+import { conectionTenis } from "../conection.js";
 
 export async function listarTenis() {
     const comando = `

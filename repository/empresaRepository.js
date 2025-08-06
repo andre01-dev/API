@@ -1,4 +1,4 @@
-import { conectionEmpresa } from "./conection.js";
+import { conectionEmpresa } from "../conection.js";
 
 export async function listarFuncionarios() {
     const comando = `
@@ -22,4 +22,13 @@ export async function inserirFuncionario(novoFunc) {
     ])
 
     return registros.insertId
+}
+
+export async function consultarFunc(id) {
+    const comando = `
+        select *
+            from microsoft
+        where id = ?
+    `
+    const [registros] = await conectionEmpresa.query(comando)
 }

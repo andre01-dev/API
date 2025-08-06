@@ -1,4 +1,4 @@
-import { conectionMateriais } from "./conection.js";
+import { conectionMateriais } from "../conection.js";
 
 export async function listarMateriais() {
     const comando = `

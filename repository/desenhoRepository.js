@@ -1,4 +1,4 @@
-import { conectionDesenho } from "./conection.js";
+import { conectionDesenho } from "../conection.js";
 
 export async function listarDesenhos() {
     let comando = `

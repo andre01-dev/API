@@ -1,4 +1,4 @@
-import { conectionNike } from "./conection.js";
+import { conectionNike } from "../conection.js";
 
 export async function listarRoupas() {
     const comando = `

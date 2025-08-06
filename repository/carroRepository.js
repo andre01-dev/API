@@ -1,4 +1,4 @@
-import { conectionCarro } from "./conection.js";
+import { conectionCarro } from "../conection.js";
 
 export async function listarVeiculos() {
     const comando = `

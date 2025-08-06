@@ -1,4 +1,4 @@
-import { conectionProduto } from "./conection.js";
+import { conectionProduto } from "../conection.js";
 
 export async function listarProdutos() {
     const comando = `
