@@ -24,11 +24,51 @@ export async function inserirFuncionario(novoFunc) {
     return registros.insertId
 }
 
-export async function consultarFunc(id) {
+export async function alterarFuncionario(id, novoFunc) {
     const comando = `
-        select *
-            from microsoft
+        update func
+        set nome = ?,
+            setor = ?,
+            idade = ?,
+            salario = ?,
+            contratacao = ?
         where id = ?
     `
-    const [registros] = await conectionEmpresa.query(comando)
+    const [registros] = await conectionEmpresa.query(comando, [
+        novoFunc.nome,
+        novoFunc.setor,
+        novoFunc.idade,
+        novoFunc.salario,
+        novoFunc.contratacao,
+        id
+    ])
+
+}
+
+export async function deletarFunc(id) {
+    const comando = `
+        delete from func
+        where id = ?
+    `
+    const [registros] = await conectionEmpresa.query(comando, [id])
+}
+
+export async function filtrarFuncNome(nome) {
+    const comando = `
+        select*
+        from func
+        where nome like ?
+    `
+    const [registros] = await conectionEmpresa.query(comando, ['%'+nome+'%'])
+    return registros
+}
+
+export async function filtrarFuncId(id) {
+    const comando = `
+        select*
+        from func
+        where id = ?
+    `
+    const [registros] = await conectionEmpresa.query(comando, [id])
+    return registros[0]
 }
