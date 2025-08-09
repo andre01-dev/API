@@ -6,10 +6,10 @@ import { alterarFuncionario, deletarFunc, filtrarFuncId, filtrarFuncNome, inseri
 import { adicionarPizza, alterarPizza, deletarPizza, filtrarPizzaId, filtrarPizzaNome, mostrarCardapio } from './repository/pizzasRepository.js';
 import { listarTenis, inserirTenis, alterarTenis, deletarTenis, filtrarTenisNome, filtrarTenisId } from './repository/tenisRepository.js';
 import { adicionarViagem, alterarViagem, deletarViagem, filtrarViagemId, filtrarViagemNome, listarViagem } from './repository/viagemRepository.js';
-import { adicionarRoupa, listarRoupas } from './repository/nikeRepository.js';
-import { adicionarVeiculo, listarVeiculos } from './repository/carroRepository.js';
-import { adicionarMaterial, listarMateriais } from './repository/materiaisRepository.js';
-import { adicionarProdutos, listarProdutos } from './repository/produtosRepository.js';
+import { adicionarRoupa, alterarRoupa, deletarRoupa, filtrarRoupaId, filtrarRoupaNome, listarRoupas } from './repository/nikeRepository.js';
+import { adicionarVeiculo, alterarCarro, deletarCarro, filtrarCarroId, filtrarCarroNome, listarVeiculos } from './repository/carroRepository.js';
+import { adicionarMaterial, alterarMaterial, deletarMaterial, filtrarMaterialId, filtrarMaterialNome, listarMateriais } from './repository/materiaisRepository.js';
+import { adicionarProdutos, alterarProduto, deletarProduto, filtrarProdutoId, filtrarProdutoNome, listarProdutos } from './repository/produtosRepository.js';
 import { conectionCarro } from './conection.js';
 
 const api = express();
@@ -284,6 +284,31 @@ api.post('/roupas', async (req, resp) => {
     resp.send({novoID: id})
 })
 
+api.put('/roupas/:id', async (req,resp) => {
+    let id = req.params.id;
+    let novaRoupa = req.body;
+    await alterarRoupa(id, novaRoupa)
+    resp.send()
+})
+
+api.delete('/roupas/:id', async (req,resp) => {
+    let id = req.params.id;
+    await deletarRoupa(id)
+    resp.send()
+})
+
+api.get('/roupas/filtrar', async (req,resp) => {
+    let nome = req.query.nome;
+    let registros = await filtrarRoupaNome(nome)
+    resp.send(registros)
+})
+
+api.get('/roupas/filtrar/:id', async (req,resp) => {
+    let id = req.params.id;
+    let registros = await filtrarRoupaId(id)
+    resp.send(registros)
+})
+
 // ---------------------------------------------- \\
 
 api.get('/carro', async (req, resp) => {
@@ -298,6 +323,31 @@ api.post('/carro', async (req,resp) => {
     let id = await adicionarVeiculo(registros)
 
     resp.send({novoID: id})
+})
+
+api.put('/carro/:id', async (req,resp) => {
+    let id = req.params.id;
+    let novoCarro = req.body;
+    await alterarCarro(id,novoCarro)
+    resp.send()
+})
+
+api.delete('/carro/:id', async (req,resp) => {
+    let id = req.params.id;
+    await deletarCarro(id)
+    resp.send()
+})
+
+api.get('/carro/filtrar', async (req,resp) => {
+    let nome = req.query.nome;
+    let registros = await filtrarCarroNome(nome)
+    resp.send(registros)
+})
+
+api.get('/carro/filtrar/:id', async (req,resp) => {
+    let id = req.params.id;
+    let registros = await filtrarCarroId(id)
+    resp.send(registros)
 })
 
 // ---------------------------------------------- \\
@@ -316,6 +366,31 @@ api.post('/materiais', async (req,resp) => {
     resp.send({novoID: id})
 })
 
+api.put('/materiais/:id', async (req,resp) => {
+    let id = req.params.id;
+    let novoMaterial = req.body;
+    await alterarMaterial(id,novoMaterial)
+    resp.send()
+})
+
+api.delete('/materiais/:id', async (req,resp) => {
+    let id = req.params.id;
+    await deletarMaterial(id)
+    resp.send()
+})
+
+api.get('/materiais/filtrar', async (req,resp) => {
+    let nome = req.query.nome
+    let registros = await filtrarMaterialNome(nome)
+    resp.send(registros)
+})
+
+api.get('/materiais/filtrar/:id', async (req,resp) => {
+    let id = req.params.id
+    let registros = await filtrarMaterialId(id)
+    resp.send(registros)
+})
+
 // ---------------------------------------------- \\
 
 api.get('/produtos', async (req,resp) => {
@@ -330,6 +405,31 @@ api.post('/produtos', async (req,resp) => {
     let id = await adicionarProdutos(registros)
 
     resp.send({novoID: id})
+})
+
+api.put('/produtos/:id', async (req,resp) => {
+    let id = req.params.id;
+    let novoProduto = req.body;
+    await alterarProduto(id,novoProduto)
+    resp.send()
+})
+
+api.delete('/produtos/:id', async (req,resp) => {
+    let id = req.params.id;
+    await deletarProduto(id)
+    resp.send()
+})
+
+api.get('/produtos/filtrar', async (req,resp) => {
+    let nome = req.query.nome
+    let registros = await filtrarProdutoNome(nome)
+    resp.send(registros)
+})
+
+api.get('/produtos/filtrar/:id', async (req,resp) => {
+    let id = req.params.id
+    let registros = await filtrarProdutoId(id)
+    resp.send(registros)
 })
 
 // ---------------------------------------------- \\
